@@ -172,7 +172,7 @@ def atLeastOne(literals: List[Expr]) -> Expr:
     True
     """
     "*** BEGIN YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    return disjoin(literals)
     "*** END YOUR CODE HERE ***"
 
 
@@ -184,7 +184,14 @@ def atMostOne(literals: List[Expr]) -> Expr:
     itertools.combinations may be useful here.
     """
     "*** BEGIN YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    conjunctions = list()
+    num_of_literals = len(literals)
+    
+    for i in range(0, num_of_literals):
+        for j in range(i+1, num_of_literals): 
+            conjunctions.append(logic.disjoin(~literals[i], ~literals[j]))
+    
+    return logic.conjoin(conjunctions)
     "*** END YOUR CODE HERE ***"
 
 
@@ -195,7 +202,7 @@ def exactlyOne(literals: List[Expr]) -> Expr:
     the expressions in the list is true.
     """
     "*** BEGIN YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    return conjoin(atLeastOne(literals), atMostOne(literals))
     "*** END YOUR CODE HERE ***"
 
 #______________________________________________________________________________
